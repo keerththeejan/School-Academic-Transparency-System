@@ -1,14 +1,7 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # Serve the Laravel front controller from /tmv without exposing /public.
+    # cPanel often points the domain at the project folder. Serve Laravel from public/.
     RewriteCond %{REQUEST_URI} !/public/
     RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
-
-# Stop Apache from listing the application root.
-Options -Indexes
-
-<FilesMatch "(^\.env.*|composer\.(json|lock)|package\.json|phpunit\.xml|vite\.config\.js)$">
-    Require all denied
-</FilesMatch>
